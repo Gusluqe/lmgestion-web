@@ -27,6 +27,21 @@ La sección "Contame de tu negocio" pide nombre, WhatsApp, email, descripción y
 
 **Importante (una sola vez):** el primer envío dispara un mail de activación de FormSubmit a la casilla de Luciana; hay que abrirlo y tocar "Activate" para que empiecen a llegar las consultas.
 
-## Publicar
+## Publicación
 
-Es un sitio estático: se puede subir tal cual a Netlify, Vercel, GitHub Pages o cualquier hosting. Subir la carpeta completa (index.html, admin.html, config.js y assets/).
+- **Sitio en vivo:** https://lmgestion.netlify.app
+- **Panel admin en vivo:** https://lmgestion.netlify.app/admin.html
+- **Repositorio:** https://github.com/Gusluqe/lmgestion-web
+- **Administración de Netlify:** https://app.netlify.com/projects/lmgestion
+
+Para publicar cambios (por ejemplo, un `config.js` nuevo descargado del admin): copiar el archivo a esta carpeta y ejecutar
+
+```
+npx netlify-cli deploy --prod --dir .
+```
+
+y para guardar el historial en GitHub:
+
+```
+git add -A && git commit -m "Actualización" && git push
+```
