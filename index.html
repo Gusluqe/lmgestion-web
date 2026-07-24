@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html lang="es-AR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LMgestión — Ordená tus números. Entendé tu negocio.</title>
+<meta name="description" content="LMgestión ayuda a pequeñas empresas y emprendedores a transformar información desordenada en claridad para decidir con seguridad. Diagnóstico financiero, reporting mensual, análisis comercial y dashboards de gestión.">
+<link rel="icon" type="image/png" href="assets/logo-lm.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,62..125,100..900;1,62..125,100..900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink: oklch(17% 0.012 155);
+  --ink-2: oklch(21% 0.014 155);
+  --ink-3: oklch(26% 0.016 155);
+  --paper: oklch(97% 0.005 155);
+  --gris: oklch(90% 0.006 155);
+  --verde: oklch(58% 0.16 150);
+  --verde-hondo: oklch(38% 0.1 152);
+  --lima: oklch(85% 0.21 135);
+  --txt-claro: oklch(93% 0.006 155);
+  --txt-suave: oklch(72% 0.01 155);
+  --txt-oscuro: oklch(22% 0.012 155);
+  --txt-medio: oklch(42% 0.012 155);
+  --borde-oscuro: oklch(30% 0.014 155);
+  --paso-1: clamp(1rem, .95rem + .3vw, 1.15rem);
+  --paso-2: clamp(1.3rem, 1.1rem + .8vw, 1.75rem);
+  --paso-3: clamp(1.7rem, 1.35rem + 1.6vw, 2.6rem);
+  --paso-4: clamp(2.3rem, 1.6rem + 3.2vw, 4.2rem);
+  --paso-5: clamp(2.6rem, 1.6rem + 4.2vw, 5.2rem);
+  --margen: clamp(1.25rem, 4vw, 4.5rem);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion: reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation:none!important;transition:none!important}
+}
+body{
+  font-family:"Archivo",system-ui,sans-serif;
+  background:var(--ink);
+  color:var(--txt-claro);
+  line-height:1.6;
+  font-size:var(--paso-1);
+}
+img{max-width:100%;display:block}
+section[id]{scroll-margin-top:4.5rem}
+a{color:inherit}
+.expandida{font-stretch:118%}
+
+/* ---------- header ---------- */
+header{
+  position:sticky;top:0;z-index:50;
+  display:flex;align-items:center;gap:1.5rem;
+  padding:.8rem var(--margen);
+  background:color-mix(in oklch, var(--ink) 88%, transparent);
+  backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--borde-oscuro);
+}
+.marca{display:flex;align-items:center;gap:.6rem;text-decoration:none;margin-right:auto}
+.marca img{height:2.1rem;width:auto}
+.marca span{font-weight:800;font-stretch:118%;font-size:1.25rem;letter-spacing:-.01em}
+.marca b{color:var(--lima);font-weight:800}
+nav{display:flex;gap:1.6rem;font-weight:500;font-size:.95rem}
+nav a{text-decoration:none;color:var(--txt-suave);transition:color .25s cubic-bezier(.16,1,.3,1)}
+nav a:hover{color:var(--lima)}
+.boton{
+  display:inline-block;
+  background:var(--lima);color:var(--txt-oscuro);
+  font-weight:700;text-decoration:none;
+  padding:.75rem 1.6rem;border-radius:99px;
+  transition:transform .3s cubic-bezier(.16,1,.3,1), background .3s;
+}
+.boton:hover{transform:translateY(-2px);background:oklch(88% 0.2 135)}
+.boton-linea{
+  display:inline-block;
+  border:1px solid var(--borde-oscuro);color:var(--txt-claro);
+  font-weight:600;text-decoration:none;
+  padding:.75rem 1.6rem;border-radius:99px;
+  transition:border-color .3s, color .3s;
+}
+.boton-linea:hover{border-color:var(--lima);color:var(--lima)}
+header .boton{padding:.55rem 1.2rem;font-size:.9rem}
+@media (max-width:720px){ nav{display:none} }
+
+/* ---------- hero ---------- */
+.hero{
+  min-height:92svh;
+  display:grid;
+  grid-template-columns:minmax(0,7fr) minmax(0,5fr);
+  align-items:stretch;
+}
+.hero-texto{
+  display:flex;flex-direction:column;justify-content:center;
+  padding:clamp(3rem,8vh,7rem) var(--margen);
+}
+.hero-etiqueta{
+  color:var(--lima);font-weight:600;font-size:.9rem;
+  letter-spacing:.18em;text-transform:uppercase;
+  margin-bottom:1.8rem;
+}
+h1{
+  font-size:var(--paso-5);
+  font-weight:900;font-stretch:118%;
+  line-height:1.04;letter-spacing:-.025em;
+  max-width:16ch;
+}
+h1 em{font-style:normal;color:var(--lima)}
+.hero-bajada{
+  margin-top:1.6rem;max-width:44ch;
+  color:var(--txt-suave);font-size:var(--paso-2);line-height:1.45;font-weight:400;
+}
+.hero-cta{display:flex;flex-wrap:wrap;gap:1rem;margin-top:2.6rem}
+.hero-foto{position:relative;overflow:hidden}
+.hero-foto img{width:100%;height:100%;object-fit:cover;object-position:72% center}
+.hero-foto::after{
+  content:"";position:absolute;inset:0;
+  background:linear-gradient(90deg, var(--ink) 0%, transparent 35%);
+}
+@media (max-width:900px){
+  .hero{grid-template-columns:1fr;min-height:auto}
+  .hero-foto{order:-1;height:38svh}
+  .hero-foto::after{background:linear-gradient(0deg, var(--ink) 0%, transparent 45%)}
+}
+
+/* ---------- perfil ---------- */
+.perfil{
+  background:var(--paper);color:var(--txt-oscuro);
+  display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);
+  gap:clamp(2rem,5vw,5rem);
+  padding:clamp(4rem,10vh,8rem) var(--margen);
+  align-items:center;
+}
+.perfil-foto{position:relative;max-width:26rem;justify-self:end}
+.perfil-foto img{border-radius:4px}
+.perfil-foto::before{
+  content:"";position:absolute;inset:auto -1.2rem -1.2rem auto;
+  width:60%;height:60%;
+  border:2px solid var(--verde);border-radius:4px;
+  z-index:-1;
+}
+.antetitulo{
+  color:var(--verde);font-weight:700;font-size:.9rem;
+  letter-spacing:.18em;text-transform:uppercase;
+  display:block;margin-bottom:1rem;
+}
+.perfil h2{
+  font-size:var(--paso-4);font-weight:800;font-stretch:112%;
+  line-height:1.1;letter-spacing:-.02em;max-width:16ch;
+}
+.perfil p{margin-top:1.4rem;max-width:52ch;font-size:var(--paso-2);line-height:1.5;color:var(--txt-medio)}
+.perfil strong{color:var(--txt-oscuro)}
+.perfil-firma{margin-top:2rem;font-weight:600;color:var(--txt-oscuro)}
+.perfil-firma small{display:block;font-weight:400;color:var(--txt-medio);font-size:.9rem}
+@media (max-width:900px){
+  .perfil{grid-template-columns:1fr}
+  .perfil-foto{justify-self:start;max-width:20rem}
+}
+
+/* ---------- servicios ---------- */
+.servicios{padding:clamp(4rem,10vh,8rem) var(--margen)}
+.servicios-cabeza{max-width:60rem;margin-bottom:clamp(2.5rem,6vh,4.5rem)}
+.servicios h2{
+  font-size:var(--paso-4);font-weight:800;font-stretch:112%;
+  line-height:1.08;letter-spacing:-.02em;
+}
+.servicio{
+  display:grid;
+  grid-template-columns:minmax(4.5rem,8rem) minmax(0,1fr) minmax(0,22rem);
+  gap:clamp(1rem,3vw,3rem);
+  align-items:center;
+  padding:clamp(1.8rem,4vh,3rem) 0;
+  border-top:1px solid var(--borde-oscuro);
+}
+.servicio:last-of-type{border-bottom:1px solid var(--borde-oscuro)}
+.servicio-num{
+  font-size:var(--paso-3);font-weight:300;
+  color:var(--lima);font-variant-numeric:tabular-nums;
+}
+.servicio h3{
+  font-size:var(--paso-3);font-weight:800;font-stretch:112%;
+  letter-spacing:-.015em;line-height:1.15;
+}
+.servicio p{margin-top:.5rem;color:var(--txt-suave);max-width:48ch}
+.servicio-foto{overflow:hidden;border-radius:4px;aspect-ratio:16/9}
+.servicio-foto img{width:100%;height:100%;object-fit:cover;transition:transform .6s cubic-bezier(.16,1,.3,1)}
+.servicio:hover .servicio-foto img{transform:scale(1.04)}
+@media (max-width:900px){
+  .servicio{grid-template-columns:minmax(3rem,4rem) 1fr}
+  .servicio-foto{grid-column:2;aspect-ratio:21/9}
+}
+
+/* ---------- beneficios ---------- */
+.beneficios{
+  background:var(--paper);color:var(--txt-oscuro);
+  padding:clamp(4rem,10vh,8rem) var(--margen);
+  display:grid;grid-template-columns:minmax(0,6fr) minmax(0,6fr);
+  gap:clamp(2.5rem,6vw,6rem);
+}
+.beneficios h2{
+  font-size:var(--paso-4);font-weight:800;font-stretch:112%;
+  line-height:1.1;letter-spacing:-.02em;max-width:14ch;
+}
+.beneficios-lista{list-style:none;margin-top:2.2rem}
+.beneficios-lista li{
+  font-size:var(--paso-2);font-weight:600;line-height:1.3;
+  padding:1.1rem 0;border-top:1px solid var(--gris);
+  display:flex;gap:1rem;align-items:baseline;
+}
+.beneficios-lista li:last-child{border-bottom:1px solid var(--gris)}
+.beneficios-lista .tilde{color:var(--verde);font-weight:800;flex-shrink:0}
+.beneficios-aparte .beneficios-foto{overflow:hidden;border-radius:4px;aspect-ratio:16/10}
+.beneficios-aparte img{width:100%;height:100%;object-fit:cover;object-position:center 25%}
+.chequeo{
+  margin-top:1.6rem;background:var(--ink);color:var(--txt-claro);
+  border-radius:4px;padding:clamp(1.5rem,3vw,2.2rem);
+}
+.chequeo h3{
+  font-size:1rem;letter-spacing:.15em;text-transform:uppercase;
+  color:var(--lima);font-weight:700;margin-bottom:1rem;
+}
+.chequeo ul{list-style:none}
+.chequeo li{padding:.45rem 0;color:var(--txt-suave);display:flex;gap:.7rem}
+.chequeo li::before{content:"✔";color:var(--lima)}
+@media (max-width:900px){ .beneficios{grid-template-columns:1fr} }
+
+/* ---------- cita ---------- */
+.cita{
+  padding:clamp(5rem,14vh,10rem) var(--margen);
+  background:
+    linear-gradient(color-mix(in oklch, var(--ink) 78%, transparent), color-mix(in oklch, var(--ink) 88%, transparent)),
+    url("assets/escritorio-nocturno.webp") center/cover no-repeat;
+  text-align:center;
+}
+.cita blockquote{
+  font-size:var(--paso-4);font-weight:800;font-stretch:112%;
+  line-height:1.15;letter-spacing:-.02em;
+  max-width:24ch;margin:0 auto;
+}
+.cita em{font-style:normal;color:var(--lima)}
+.cita figcaption{margin-top:2rem;color:var(--txt-suave)}
+.cita figcaption strong{color:var(--txt-claro);font-weight:700}
+
+/* ---------- cupón ---------- */
+.cupon-pill{
+  display:inline-flex;align-items:center;gap:.6rem;
+  margin-top:1.8rem;padding:.55rem 1.1rem;
+  border:1px dashed var(--lima);border-radius:99px;
+  color:var(--lima);font-size:.9rem;font-weight:600;
+}
+.cupon-pill code{
+  font-family:inherit;background:var(--lima);color:var(--txt-oscuro);
+  padding:.1rem .55rem;border-radius:99px;font-weight:800;letter-spacing:.05em;
+}
+
+/* ---------- formulario ---------- */
+.empezar{
+  background:var(--paper);color:var(--txt-oscuro);
+  padding:clamp(4rem,10vh,8rem) var(--margen);
+  display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);
+  gap:clamp(2.5rem,6vw,6rem);
+}
+.empezar h2{
+  font-size:var(--paso-4);font-weight:800;font-stretch:112%;
+  line-height:1.1;letter-spacing:-.02em;max-width:14ch;
+}
+.empezar-bajada{margin-top:1.4rem;color:var(--txt-medio);max-width:40ch;font-size:var(--paso-2);line-height:1.45}
+.formulario{display:grid;gap:1.1rem;align-content:start}
+.campo label{display:block;font-weight:600;font-size:.9rem;margin-bottom:.35rem}
+.campo input,.campo textarea{
+  width:100%;font:inherit;color:var(--txt-oscuro);
+  background:oklch(100% 0 0 / .7);
+  border:1px solid var(--gris);border-radius:6px;
+  padding:.75rem .9rem;
+  transition:border-color .25s;
+}
+.campo input:focus,.campo textarea:focus{outline:none;border-color:var(--verde)}
+.campo textarea{min-height:7rem;resize:vertical}
+.campo-doble{display:grid;grid-template-columns:1fr 1fr;gap:1.1rem}
+.cupon-estado{font-size:.9rem;font-weight:600;margin-top:.4rem;min-height:1.2em}
+.cupon-estado.ok{color:var(--verde)}
+.cupon-estado.mal{color:oklch(55% 0.18 25)}
+.formulario .boton{border:none;cursor:pointer;font-size:1rem;justify-self:start}
+.form-resultado{display:none;padding:1.2rem 1.4rem;border-radius:6px;font-weight:600}
+.form-resultado.ok{display:block;background:oklch(93% 0.05 150);color:var(--verde-hondo)}
+.form-resultado.mal{display:block;background:oklch(93% 0.03 25);color:oklch(45% 0.15 25)}
+@media (max-width:900px){ .empezar{grid-template-columns:1fr} .campo-doble{grid-template-columns:1fr} }
+
+/* ---------- contacto ---------- */
+.contacto{
+  padding:clamp(4rem,12vh,9rem) var(--margen);
+  display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);
+  gap:clamp(2.5rem,6vw,6rem);
+}
+.contacto h2{
+  font-size:var(--paso-5);font-weight:900;font-stretch:118%;
+  line-height:1.05;letter-spacing:-.025em;
+}
+.contacto-bajada{margin-top:1.4rem;color:var(--txt-suave);max-width:44ch;font-size:var(--paso-2);line-height:1.45}
+.contacto .hero-cta{margin-top:2.4rem}
+.contacto-lista{list-style:none;align-self:center}
+.contacto-lista li{border-top:1px solid var(--borde-oscuro);padding:1.15rem 0}
+.contacto-lista li:last-child{border-bottom:1px solid var(--borde-oscuro)}
+.contacto-lista small{
+  display:block;font-size:.8rem;letter-spacing:.15em;text-transform:uppercase;
+  color:var(--txt-suave);margin-bottom:.15rem;
+}
+.contacto-lista a{
+  text-decoration:none;font-weight:700;font-size:var(--paso-2);
+  transition:color .25s;overflow-wrap:anywhere;
+}
+.contacto-lista a:hover{color:var(--lima)}
+@media (max-width:900px){ .contacto{grid-template-columns:1fr} }
+
+/* ---------- footer ---------- */
+footer{
+  border-top:1px solid var(--borde-oscuro);
+  padding:2rem var(--margen);
+  display:flex;flex-wrap:wrap;gap:1rem;align-items:center;justify-content:space-between;
+  color:var(--txt-suave);font-size:.9rem;
+}
+footer .marca img{height:1.6rem}
+footer .marca span{font-size:1rem}
+
+/* ---------- whatsapp flotante ---------- */
+.wa-flotante{
+  position:fixed;right:1.4rem;bottom:1.4rem;z-index:60;
+  width:3.4rem;height:3.4rem;border-radius:50%;
+  background:oklch(65% 0.18 150);
+  display:grid;place-items:center;
+  box-shadow:0 8px 24px oklch(0% 0 0 / .35);
+  transition:transform .3s cubic-bezier(.16,1,.3,1);
+}
+.wa-flotante:hover{transform:scale(1.08)}
+.wa-flotante svg{width:1.8rem;height:1.8rem;fill:oklch(98% 0 0)}
+
+/* ---------- reveals ---------- */
+.aparece{opacity:0;transform:translateY(24px);transition:opacity .8s cubic-bezier(.16,1,.3,1), transform .8s cubic-bezier(.16,1,.3,1)}
+.aparece.visto{opacity:1;transform:none}
+@media (prefers-reduced-motion: reduce){ .aparece{opacity:1;transform:none} }
+</style>
+</head>
+<body>
+
+<header>
+  <a class="marca" href="#">
+    <img src="assets/logo-lm.png" alt="Logo LMgestión">
+    <span>lm<b>gestión</b></span>
+  </a>
+  <nav aria-label="Secciones">
+    <a href="#perfil">Perfil</a>
+    <a href="#servicios">Servicios</a>
+    <a href="#beneficios">Beneficios</a>
+    <a href="#contacto">Contacto</a>
+  </nav>
+  <a class="boton" href="https://forms.gle/4NzCWJtQhGDwfUgx7" target="_blank" rel="noopener">Solicitar diagnóstico</a>
+</header>
+
+<section class="hero">
+  <div class="hero-texto">
+    <p class="hero-etiqueta aparece">Gestión financiera para pymes y emprendedores</p>
+    <h1 class="aparece">Ordená tus números. Entendé tu negocio. <em>Tomá mejores decisiones.</em></h1>
+    <p class="hero-bajada aparece">Transformo información desordenada en claridad para que decidas con seguridad.</p>
+    <div class="hero-cta aparece">
+      <a class="boton" href="https://forms.gle/4NzCWJtQhGDwfUgx7" target="_blank" rel="noopener">Solicitar diagnóstico</a>
+      <a class="boton-linea" href="https://wa.me/5491134241283" target="_blank" rel="noopener">Escribime por WhatsApp</a>
+    </div>
+    <p class="cupon-pill aparece" id="cupon-banner" hidden>Cupón <code id="cupon-codigo"></code> <span id="cupon-texto"></span></p>
+  </div>
+  <div class="hero-foto">
+    <img src="assets/luciana-dashboard.webp" alt="Luciana Morales analizando el tablero de gestión de un negocio" fetchpriority="high">
+  </div>
+</section>
+
+<section class="perfil" id="perfil">
+  <div class="perfil-foto aparece">
+    <img src="assets/luciana-trabajando.webp" alt="Luciana Morales trabajando en la computadora">
+  </div>
+  <div>
+    <span class="antetitulo aparece">Perfil empresarial</span>
+    <h2 class="aparece">Tu negocio genera datos todos los días. Yo los convierto en decisiones.</h2>
+    <p class="aparece">Ayudo a <strong>pequeñas empresas y emprendedores</strong> a transformar información desordenada en claridad para decidir con seguridad. Sin tecnicismos, con informes que se entienden y números que le sirven a tu negocio.</p>
+    <p class="perfil-firma aparece">Luciana Morales<small>Lic. en Administración · Directora Ejecutiva de LMgestión</small></p>
+  </div>
+</section>
+
+<section class="servicios" id="servicios">
+  <div class="servicios-cabeza">
+    <span class="antetitulo aparece">Nuestros servicios</span>
+    <h2 class="aparece">Cuatro formas de poner tus números a trabajar.</h2>
+  </div>
+
+  <article class="servicio aparece">
+    <div class="servicio-num">01</div>
+    <div>
+      <h3>Diagnóstico financiero</h3>
+      <p>Revisión integral de ingresos, gastos, estructura y situación actual del negocio.</p>
+    </div>
+    <div class="servicio-foto"><img src="assets/diagnostico-financiero.webp" alt="Diagnóstico financiero: ingresos, gastos y estructura sobre la mesa de trabajo" loading="lazy"></div>
+  </article>
+
+  <article class="servicio aparece">
+    <div class="servicio-num">02</div>
+    <div>
+      <h3>Reporting mensual</h3>
+      <p>Informes claros con indicadores clave para seguimiento y decisiones.</p>
+    </div>
+    <div class="servicio-foto"><img src="assets/informes-mesa.webp" alt="Informes mensuales impresos con gráficos e indicadores" loading="lazy"></div>
+  </article>
+
+  <article class="servicio aparece">
+    <div class="servicio-num">03</div>
+    <div>
+      <h3>Análisis comercial</h3>
+      <p>Ventas, rentabilidad, productos, clientes y oportunidades de crecimiento.</p>
+    </div>
+    <div class="servicio-foto"><img src="assets/plan-de-accion.webp" alt="Sesión de análisis comercial con plan de acción y proyección de rentabilidad" loading="lazy"></div>
+  </article>
+
+  <article class="servicio aparece">
+    <div class="servicio-num">04</div>
+    <div>
+      <h3>Dashboard de gestión</h3>
+      <p>Visualización simple y formal de métricas importantes.</p>
+    </div>
+    <div class="servicio-foto"><img src="assets/escritorio-dashboard.webp" alt="Dashboard de gestión con métricas del negocio en la notebook" loading="lazy"></div>
+  </article>
+</section>
+
+<section class="beneficios" id="beneficios">
+  <div>
+    <span class="antetitulo aparece">Beneficios</span>
+    <h2 class="aparece">Menos caos, más control.</h2>
+    <ul class="beneficios-lista">
+      <li class="aparece"><span class="tilde">→</span>Más claridad en tus números</li>
+      <li class="aparece"><span class="tilde">→</span>Mejor control del negocio</li>
+      <li class="aparece"><span class="tilde">→</span>Decisiones con información real</li>
+      <li class="aparece"><span class="tilde">→</span>Menos improvisación</li>
+      <li class="aparece"><span class="tilde">→</span>Más foco en crecer</li>
+    </ul>
+  </div>
+  <div class="beneficios-aparte">
+    <div class="beneficios-foto aparece">
+      <img src="assets/asesoria-cliente.webp" alt="Luciana revisando los números de un cliente en una asesoría" loading="lazy">
+    </div>
+    <div class="chequeo aparece">
+      <h3>Con LMgestión vas a poder</h3>
+      <ul>
+        <li>Detectar gastos ocultos</li>
+        <li>Identificar productos más rentables</li>
+        <li>Medir evolución de ventas</li>
+        <li>Ordenar información clave</li>
+        <li>Convertir datos en decisiones</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="cita">
+  <figure>
+    <blockquote class="aparece">"Tu negocio no necesita más caos. <em>Necesita claridad.</em>"</blockquote>
+    <figcaption class="aparece"><strong>Luciana Morales</strong> · Directora Ejecutiva</figcaption>
+  </figure>
+</section>
+
+<section class="empezar" id="empezar">
+  <div>
+    <span class="antetitulo aparece">Empecemos</span>
+    <h2 class="aparece">Contame de tu negocio.</h2>
+    <p class="empezar-bajada aparece">Dejame tus datos y una breve descripción. Me llega directo y me comunico con vos para coordinar los próximos pasos.</p>
+  </div>
+  <form class="formulario aparece" id="form-contacto" novalidate>
+    <div class="campo">
+      <label for="f-nombre">Nombre y negocio *</label>
+      <input id="f-nombre" name="nombre" type="text" required autocomplete="name" placeholder="Ej: María, tienda de indumentaria">
+    </div>
+    <div class="campo-doble">
+      <div class="campo">
+        <label for="f-wsp">WhatsApp *</label>
+        <input id="f-wsp" name="whatsapp" type="tel" required autocomplete="tel" placeholder="11 1234 5678">
+      </div>
+      <div class="campo">
+        <label for="f-mail">Email *</label>
+        <input id="f-mail" name="email" type="email" required autocomplete="email" placeholder="tu@correo.com">
+      </div>
+    </div>
+    <div class="campo">
+      <label for="f-desc">¿Qué necesitás ordenar? *</label>
+      <textarea id="f-desc" name="descripcion" required placeholder="Contame brevemente tu situación: ventas, gastos, planillas, lo que te preocupa."></textarea>
+    </div>
+    <div class="campo">
+      <label for="f-cupon">Cupón de descuento (opcional)</label>
+      <input id="f-cupon" name="cupon" type="text" autocapitalize="characters" placeholder="Ingresá tu cupón">
+      <p class="cupon-estado" id="cupon-estado" aria-live="polite"></p>
+    </div>
+    <button class="boton" type="submit" id="form-enviar">Enviar consulta</button>
+    <div class="form-resultado" id="form-resultado" role="status"></div>
+  </form>
+</section>
+
+<section class="contacto" id="contacto">
+  <div>
+    <span class="antetitulo aparece">Contacto</span>
+    <h2 class="aparece">Trabajemos <em style="font-style:normal;color:var(--lima)">juntos.</em></h2>
+    <p class="contacto-bajada aparece">Completá el diagnóstico inicial y me comunico con vos para empezar a ordenar los números de tu negocio.</p>
+    <div class="hero-cta aparece">
+      <a class="boton" href="https://forms.gle/4NzCWJtQhGDwfUgx7" target="_blank" rel="noopener">Completar diagnóstico inicial</a>
+    </div>
+  </div>
+  <ul class="contacto-lista">
+    <li class="aparece">
+      <small>WhatsApp</small>
+      <a href="https://wa.me/5491134241283" target="_blank" rel="noopener">+54 11 3424 1283</a>
+    </li>
+    <li class="aparece">
+      <small>Correo electrónico</small>
+      <a href="mailto:lucianabm.adm@gmail.com" id="link-email">lucianabm.adm@gmail.com</a>
+    </li>
+    <li class="aparece">
+      <small>Instagram</small>
+      <a href="https://www.instagram.com/lucianamorales_lmgestion" target="_blank" rel="noopener">@lucianamorales_lmgestion</a>
+    </li>
+    <li class="aparece">
+      <small>LinkedIn</small>
+      <a href="https://www.linkedin.com/in/luciana-b-morales" target="_blank" rel="noopener">luciana-b-morales</a>
+    </li>
+  </ul>
+</section>
+
+<footer>
+  <a class="marca" href="#">
+    <img src="assets/logo-lm.png" alt="">
+    <span>lm<b>gestión</b></span>
+  </a>
+  <p>© 2026 LMgestión · Luciana Morales, Lic. en Administración · Buenos Aires, Argentina</p>
+</footer>
+
+<a class="wa-flotante" href="https://wa.me/5491134241283" target="_blank" rel="noopener" aria-label="Escribir por WhatsApp">
+  <svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16 3C9.4 3 4 8.4 4 15c0 2.1.6 4.2 1.6 6L4 29l8.2-1.5c1.2.5 2.5.7 3.8.7 6.6 0 12-5.4 12-12S22.6 3 16 3zm0 21.8c-1.2 0-2.4-.2-3.5-.7l-.4-.2-4.9.9 1-4.7-.3-.4c-1-1.6-1.5-3.4-1.5-5.2 0-5.3 4.3-9.6 9.6-9.6s9.6 4.3 9.6 9.6-4.3 9.6-9.6 9.6zm5.3-7.2c-.3-.1-1.7-.8-2-.9-.3-.1-.5-.1-.7.1-.2.3-.8.9-.9 1.1-.2.2-.3.2-.6.1-.3-.1-1.2-.5-2.3-1.4-.9-.8-1.4-1.7-1.6-2-.2-.3 0-.4.1-.6l.4-.5c.1-.2.2-.3.3-.5.1-.2 0-.4 0-.5l-.9-2.2c-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5s1.1 2.9 1.2 3.1c.1.2 2.1 3.2 5.1 4.5.7.3 1.3.5 1.7.6.7.2 1.4.2 1.9.1.6-.1 1.7-.7 2-1.4.2-.7.2-1.3.2-1.4-.1-.1-.3-.2-.6-.3z"/></svg>
+</a>
+
+<script src="config.js"></script>
+<script>
+const io = new IntersectionObserver(es => {
+  es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visto'); io.unobserve(e.target); } });
+}, { threshold: 0.15 });
+document.querySelectorAll('.aparece').forEach((el, i) => {
+  el.style.transitionDelay = (i % 5) * 60 + 'ms';
+  io.observe(el);
+});
+
+/* Config: valores por defecto de config.js + cambios guardados desde admin.html */
+const config = (() => {
+  const base = window.SITE_CONFIG || { email: 'lucianabm.adm@gmail.com', cupones: [] };
+  try {
+    const extra = JSON.parse(localStorage.getItem('lm_config_override'));
+    return extra ? { ...base, ...extra } : base;
+  } catch { return base; }
+})();
+
+const linkEmail = document.getElementById('link-email');
+linkEmail.textContent = config.email;
+linkEmail.href = 'mailto:' + config.email;
+
+const cuponesActivos = (config.cupones || []).filter(c => c.activo);
+if (cuponesActivos.length) {
+  const c = cuponesActivos[0];
+  document.getElementById('cupon-codigo').textContent = c.codigo;
+  document.getElementById('cupon-texto').textContent = c.descuento + '% de descuento en tu primera gestión';
+  document.getElementById('cupon-banner').hidden = false;
+}
+
+/* Validación de cupón en el formulario */
+const campoCupon = document.getElementById('f-cupon');
+const estadoCupon = document.getElementById('cupon-estado');
+let cuponAplicado = null;
+campoCupon.addEventListener('input', () => {
+  const v = campoCupon.value.trim().toUpperCase();
+  cuponAplicado = null;
+  estadoCupon.className = 'cupon-estado';
+  estadoCupon.textContent = '';
+  if (!v) return;
+  const c = cuponesActivos.find(c => c.codigo.toUpperCase() === v);
+  if (c) {
+    cuponAplicado = c;
+    estadoCupon.classList.add('ok');
+    estadoCupon.textContent = '✔ Cupón válido: ' + c.descuento + '% de descuento';
+  } else {
+    estadoCupon.classList.add('mal');
+    estadoCupon.textContent = 'Ese cupón no es válido';
+  }
+});
+
+/* Envío: FormSubmit por email, con respaldo por WhatsApp si falla */
+const form = document.getElementById('form-contacto');
+const resultado = document.getElementById('form-resultado');
+form.addEventListener('submit', async e => {
+  e.preventDefault();
+  if (!form.reportValidity()) return;
+  const boton = document.getElementById('form-enviar');
+  boton.disabled = true;
+  boton.textContent = 'Enviando…';
+  const datos = {
+    Nombre: form.nombre.value.trim(),
+    WhatsApp: form.whatsapp.value.trim(),
+    Email: form.email.value.trim(),
+    Descripcion: form.descripcion.value.trim(),
+    Cupon: cuponAplicado ? cuponAplicado.codigo + ' (' + cuponAplicado.descuento + '% dto)' : (form.cupon.value.trim() || 'sin cupón'),
+    _subject: 'Nueva consulta desde la web LMgestión',
+    _template: 'table',
+    _captcha: 'false'
+  };
+  try {
+    const r = await fetch('https://formsubmit.co/ajax/' + config.email, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      body: JSON.stringify(datos)
+    });
+    if (!r.ok) throw new Error();
+    form.hidden = true;
+    resultado.className = 'form-resultado ok';
+    resultado.textContent = '¡Listo! Recibí tu consulta y me comunico con vos a la brevedad.';
+  } catch {
+    resultado.className = 'form-resultado mal';
+    resultado.innerHTML = 'No se pudo enviar el formulario. Podés mandarme los mismos datos directo por WhatsApp: ';
+    const wa = document.createElement('a');
+    wa.href = 'https://wa.me/5491134241283?text=' + encodeURIComponent(
+      'Hola Luciana! Soy ' + datos.Nombre + '. ' + datos.Descripcion + ' (Email: ' + datos.Email + ', Cupón: ' + datos.Cupon + ')'
+    );
+    wa.target = '_blank';
+    wa.rel = 'noopener';
+    wa.textContent = 'abrir WhatsApp';
+    resultado.appendChild(wa);
+    boton.disabled = false;
+    boton.textContent = 'Enviar consulta';
+  }
+});
+</script>
+</body>
+</html>

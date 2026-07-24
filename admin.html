@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="es-AR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin — LMgestión</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" type="image/png" href="assets/logo-lm.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,62..125,100..900;1,62..125,100..900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink: oklch(17% 0.012 155);
+  --ink-2: oklch(21% 0.014 155);
+  --paper: oklch(97% 0.005 155);
+  --gris: oklch(90% 0.006 155);
+  --verde: oklch(58% 0.16 150);
+  --verde-hondo: oklch(38% 0.1 152);
+  --lima: oklch(85% 0.21 135);
+  --txt-claro: oklch(93% 0.006 155);
+  --txt-suave: oklch(72% 0.01 155);
+  --txt-oscuro: oklch(22% 0.012 155);
+  --txt-medio: oklch(42% 0.012 155);
+  --borde: oklch(30% 0.014 155);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{
+  font-family:"Archivo",system-ui,sans-serif;
+  background:var(--ink);color:var(--txt-claro);
+  line-height:1.55;min-height:100svh;
+}
+.cabecera{
+  display:flex;align-items:center;gap:.6rem;
+  padding:1rem clamp(1.25rem,4vw,3rem);
+  border-bottom:1px solid var(--borde);
+}
+.cabecera img{height:1.9rem}
+.cabecera strong{font-weight:800;font-stretch:118%;font-size:1.1rem}
+.cabecera strong b{color:var(--lima)}
+.cabecera span{margin-left:auto;color:var(--txt-suave);font-size:.85rem;letter-spacing:.12em;text-transform:uppercase}
+main{max-width:52rem;margin:0 auto;padding:clamp(2rem,6vh,4rem) clamp(1.25rem,4vw,3rem)}
+h1{font-size:clamp(1.7rem,3vw,2.4rem);font-weight:800;font-stretch:112%;letter-spacing:-.015em}
+.nota{color:var(--txt-suave);margin-top:.6rem;max-width:60ch}
+.tarjeta{
+  background:var(--ink-2);border:1px solid var(--borde);border-radius:8px;
+  padding:clamp(1.4rem,3vw,2rem);margin-top:2rem;
+}
+.tarjeta h2{font-size:1.15rem;font-weight:700;margin-bottom:1rem}
+label{display:block;font-weight:600;font-size:.9rem;margin-bottom:.35rem;color:var(--txt-suave)}
+input[type=text],input[type=email],input[type=password],input[type=number]{
+  width:100%;font:inherit;color:var(--txt-claro);
+  background:var(--ink);border:1px solid var(--borde);border-radius:6px;
+  padding:.7rem .9rem;
+}
+input:focus{outline:none;border-color:var(--verde)}
+input:disabled{opacity:.5;cursor:not-allowed}
+.boton{
+  display:inline-block;background:var(--lima);color:var(--txt-oscuro);
+  font:inherit;font-weight:700;border:none;cursor:pointer;
+  padding:.7rem 1.5rem;border-radius:99px;
+}
+.boton:hover{background:oklch(88% 0.2 135)}
+.boton-linea{
+  display:inline-block;background:none;color:var(--txt-claro);
+  font:inherit;font-weight:600;border:1px solid var(--borde);cursor:pointer;
+  padding:.7rem 1.5rem;border-radius:99px;
+}
+.boton-linea:hover{border-color:var(--lima);color:var(--lima)}
+.fila-cupon{
+  display:grid;grid-template-columns:minmax(0,1fr) 6rem 5rem 2.5rem;
+  gap:.7rem;align-items:center;margin-bottom:.7rem;
+}
+.fila-cupon .quitar{
+  background:none;border:1px solid var(--borde);color:var(--txt-suave);
+  border-radius:6px;cursor:pointer;font:inherit;padding:.55rem 0;
+}
+.fila-cupon .quitar:hover{border-color:oklch(55% 0.18 25);color:oklch(65% 0.18 25)}
+.interruptor{display:flex;align-items:center;gap:.4rem;font-size:.85rem;color:var(--txt-suave)}
+.interruptor input{accent-color:var(--verde);width:1.1rem;height:1.1rem}
+.acciones{display:flex;flex-wrap:wrap;gap:.8rem;margin-top:2rem}
+.aviso{
+  margin-top:1rem;padding:.9rem 1.1rem;border-radius:6px;font-weight:600;display:none;
+}
+.aviso.ok{display:block;background:oklch(30% 0.06 150);color:var(--lima)}
+#panel{display:none}
+.campos-cupon-cab{
+  display:grid;grid-template-columns:minmax(0,1fr) 6rem 5rem 2.5rem;
+  gap:.7rem;font-size:.75rem;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--txt-suave);margin-bottom:.5rem;
+}
+.pie-nota{margin-top:2.5rem;color:var(--txt-suave);font-size:.9rem;max-width:60ch}
+.pie-nota strong{color:var(--txt-claro)}
+@media (max-width:560px){
+  .fila-cupon,.campos-cupon-cab{grid-template-columns:minmax(0,1fr) 4.5rem 4rem 2.2rem}
+}
+</style>
+</head>
+<body>
+
+<div class="cabecera">
+  <img src="assets/logo-lm.png" alt="">
+  <strong>lm<b>gestión</b></strong>
+  <span>Panel de administración</span>
+</div>
+
+<main>
+  <section id="acceso">
+    <h1>Acceso</h1>
+    <p class="nota">Ingresá la clave de administración para editar los datos del sitio.</p>
+    <div class="tarjeta">
+      <label for="clave">Clave</label>
+      <input type="password" id="clave" autocomplete="current-password">
+      <div class="acciones">
+        <button class="boton" id="entrar">Ingresar</button>
+      </div>
+      <div class="aviso" id="acceso-error" style="background:oklch(28% 0.05 25);color:oklch(75% 0.15 25)"></div>
+    </div>
+  </section>
+
+  <section id="panel">
+    <h1>Datos del sitio</h1>
+    <p class="nota">Los cambios se guardan en este navegador y se aplican al instante en la página. Para que se vean en el sitio publicado para todos los visitantes, usá "Descargar config.js" y reemplazá ese archivo en el hosting.</p>
+
+    <div class="tarjeta">
+      <h2>Contacto</h2>
+      <label for="c-email">Email de contacto (recibe las consultas del formulario)</label>
+      <input type="email" id="c-email">
+      <div style="margin-top:1rem">
+        <label for="c-wsp">WhatsApp (fijo, no editable)</label>
+        <input type="text" id="c-wsp" value="+54 11 3424 1283" disabled>
+      </div>
+    </div>
+
+    <div class="tarjeta">
+      <h2>Cupones de descuento</h2>
+      <div class="campos-cupon-cab"><span>Código</span><span>% dto</span><span>Activo</span><span></span></div>
+      <div id="lista-cupones"></div>
+      <button class="boton-linea" id="agregar-cupon" type="button">+ Agregar cupón</button>
+    </div>
+
+    <div class="acciones">
+      <button class="boton" id="guardar">Guardar cambios</button>
+      <button class="boton-linea" id="descargar">Descargar config.js</button>
+      <button class="boton-linea" id="restaurar">Restaurar originales</button>
+    </div>
+    <div class="aviso ok" id="guardado"></div>
+
+    <p class="pie-nota">Las consultas del formulario llegan al <strong>email de contacto</strong> configurado arriba, con WhatsApp, email y descripción de la persona interesada. El primer envío requiere confirmar la dirección: FormSubmit manda un mail de activación a esa casilla, hay que abrirlo y tocar "Activate".</p>
+  </section>
+</main>
+
+<script src="config.js"></script>
+<script>
+const HASH_CLAVE = '2bd439665fd717661308f06e5e6eca0bb22ac1e5ac8307d6f17f7e211059f07b';
+
+async function sha256(t) {
+  const b = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(t));
+  return [...new Uint8Array(b)].map(x => x.toString(16).padStart(2, '0')).join('');
+}
+
+const $ = id => document.getElementById(id);
+
+async function entrar() {
+  if (await sha256($('clave').value) === HASH_CLAVE) {
+    sessionStorage.setItem('lm_admin', '1');
+    $('acceso').style.display = 'none';
+    $('panel').style.display = 'block';
+    cargar();
+  } else {
+    $('acceso-error').style.display = 'block';
+    $('acceso-error').textContent = 'Clave incorrecta.';
+  }
+}
+$('entrar').addEventListener('click', entrar);
+$('clave').addEventListener('keydown', e => { if (e.key === 'Enter') entrar(); });
+if (sessionStorage.getItem('lm_admin') === '1') {
+  $('acceso').style.display = 'none';
+  $('panel').style.display = 'block';
+  cargar();
+}
+
+function configActual() {
+  const base = window.SITE_CONFIG || { email: '', cupones: [] };
+  try {
+    const extra = JSON.parse(localStorage.getItem('lm_config_override'));
+    return extra ? { ...base, ...extra } : structuredClone(base);
+  } catch { return structuredClone(base); }
+}
+
+function filaCupon(c = { codigo: '', descuento: 10, activo: true }) {
+  const div = document.createElement('div');
+  div.className = 'fila-cupon';
+  div.innerHTML = `
+    <input type="text" class="cupon-codigo" value="${c.codigo}" placeholder="CODIGO" style="text-transform:uppercase">
+    <input type="number" class="cupon-dto" value="${c.descuento}" min="1" max="100">
+    <span class="interruptor"><input type="checkbox" class="cupon-activo" ${c.activo ? 'checked' : ''}>Sí</span>
+    <button type="button" class="quitar" title="Eliminar cupón">✕</button>`;
+  div.querySelector('.quitar').addEventListener('click', () => div.remove());
+  return div;
+}
+
+function cargar() {
+  const cfg = configActual();
+  $('c-email').value = cfg.email;
+  $('lista-cupones').innerHTML = '';
+  (cfg.cupones || []).forEach(c => $('lista-cupones').appendChild(filaCupon(c)));
+}
+
+$('agregar-cupon').addEventListener('click', () => $('lista-cupones').appendChild(filaCupon()));
+
+function leerFormulario() {
+  return {
+    email: $('c-email').value.trim(),
+    cupones: [...document.querySelectorAll('.fila-cupon')].map(f => ({
+      codigo: f.querySelector('.cupon-codigo').value.trim().toUpperCase(),
+      descuento: Number(f.querySelector('.cupon-dto').value) || 0,
+      activo: f.querySelector('.cupon-activo').checked
+    })).filter(c => c.codigo)
+  };
+}
+
+$('guardar').addEventListener('click', () => {
+  const cfg = leerFormulario();
+  if (!cfg.email || !cfg.email.includes('@')) { alert('Ingresá un email válido.'); return; }
+  localStorage.setItem('lm_config_override', JSON.stringify(cfg));
+  $('guardado').style.display = 'block';
+  $('guardado').textContent = '✔ Guardado. Los cambios ya se ven en la página en este navegador.';
+});
+
+$('descargar').addEventListener('click', () => {
+  const cfg = leerFormulario();
+  const contenido = `// Configuración editable del sitio LMgestión.
+// Generado desde admin.html el ${new Date().toLocaleDateString('es-AR')}.
+window.SITE_CONFIG = ${JSON.stringify(cfg, null, 2)};
+`;
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(new Blob([contenido], { type: 'text/javascript' }));
+  a.download = 'config.js';
+  a.click();
+  URL.revokeObjectURL(a.href);
+});
+
+$('restaurar').addEventListener('click', () => {
+  if (!confirm('¿Volver a los valores originales de config.js? Se pierden los cambios guardados en este navegador.')) return;
+  localStorage.removeItem('lm_config_override');
+  cargar();
+  $('guardado').style.display = 'block';
+  $('guardado').textContent = '✔ Restaurado a los valores originales.';
+});
+</script>
+</body>
+</html>
