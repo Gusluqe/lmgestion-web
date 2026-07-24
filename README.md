@@ -17,13 +17,12 @@ Abrir una terminal en esta carpeta y ejecutar `python -m http.server 8642`, desp
 
 Permite editar sin tocar código:
 - **Email de contacto** (adonde llegan las consultas del formulario). El WhatsApp queda fijo a pedido.
-- **Cupones de descuento**: agregar, desactivar o borrar. Viene cargado `MIPRIMERGESTION` con 10% de descuento; se muestra como banner en el hero y se valida en el formulario.
 
 Los cambios guardados aplican al instante **en ese navegador**. Para que los vean todos los visitantes del sitio publicado: botón **"Descargar config.js"** y reemplazar el archivo `config.js` en el hosting.
 
 ## Formulario de consultas
 
-La sección "Contame de tu negocio" pide nombre, WhatsApp, email, descripción y cupón (opcional). Se envía por email (FormSubmit) a la casilla configurada; si falla, ofrece mandar los mismos datos por WhatsApp.
+La sección "Contame de tu negocio" pide nombre, WhatsApp, email y descripción. Se envía por email (FormSubmit) a la casilla configurada; si falla, ofrece mandar los mismos datos por WhatsApp.
 
 **Importante (una sola vez):** el primer envío dispara un mail de activación de FormSubmit a la casilla de Luciana; hay que abrirlo y tocar "Activate" para que empiecen a llegar las consultas.
 
